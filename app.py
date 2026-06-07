@@ -1,6 +1,6 @@
 import os
 from models import db, Movie
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from data_manager import DataManager
 
 app = Flask(__name__)
@@ -43,8 +43,17 @@ def get_movies(user_id):
 
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
 def add_movie(user_id):
-    # add movie by title with user as FK ("owner")
-    # Try to retrieve rest of movie info from OMDB API
+    print('Running add_movie')
+    user = dm.get_user(user_id)
+    title = request.form.get('title', None)
+    year = request.form.get('year', None)
+    # Try to retrieve the other fields from OMDB API
+    new_movie = Movie(
+        user=user,
+        title=title,
+        year=year,
+    )
+    dm.add_movie(new_movie)
     return redirect(url_for('get_movies', user_id=user_id))
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/update',
