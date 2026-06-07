@@ -98,6 +98,13 @@ def delete_movie(user_id, movie_id):
     return redirect(url_for('get_movies', user_id=user_id))
 
 
+# Define Custom Error Handling
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
