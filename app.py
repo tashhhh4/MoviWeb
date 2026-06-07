@@ -29,8 +29,8 @@ def list_users():
     return render_template('index.html', users=users)
 
 @app.route('/users', methods=['POST'])
-def add_user():
-    # add a user to the database
+def create_user():
+    # create a user and add it to the database
     return redirect('/')
 
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
