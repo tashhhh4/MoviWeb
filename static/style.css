@@ -132,7 +132,7 @@ h1, h2 {
 
 /* Forms */
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
     padding: 8px 12px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
