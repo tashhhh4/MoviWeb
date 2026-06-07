@@ -14,30 +14,32 @@
   <ul>
     {% for movie in movies %}
     <li>
+      {% if movie.poster_url %}
       <img
           src="{{ movie.poster_url }}"
           alt="Poster for {{ movie.title }}"
       />
+      {% endif %}
+      <form>
+        <input type="text" id="title" name="title" value="{{ movie.title }}"/>
+        <input class="btn sm" type="submit" value="Update"/>
+      </form>
+      {% if movie.year %}
+      <p class="movie-info">
+        <span>Year:</span>
+        <span>{{ movie.year }}</span>
+      </p>
+      {% endif %}
+      {% if movie.director %}
+      <p class="movie-info">
+        <span>Director:</span>
+        <span>{{ movie.director }}</span>
+      </p>
+      {% endif %}
+      <form>
+        <input class="btn sm delete" type="submit" value="Delete"/>
+      </form>
     </li>
-    <form>
-      <input type="text" id="title" name="title"/>
-      <input class="btn sm" type="submit" value="Update"/>
-    </form>
-    {% if movie.year %}
-    <p class="movie-info">
-      <span>Year:</span>
-      <span>{{ movie.year }}</span>
-    </p>
-    {% endif %}
-    {% if movie.director %}
-    <p class="movie-info">
-      <span>Director:</span>
-      <span>{{ movie.director }}</span>
-    </p>
-    {% endif %}
-    <form>
-      <input class="btn sm delete" type="submit" value="Delete"/>
-    </form>
     {% endfor %}
   </ul>
 </section>

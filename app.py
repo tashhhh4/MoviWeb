@@ -37,8 +37,9 @@ def create_user():
 
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
 def get_movies(user_id):
+    user = dm.get_user(user_id)
     movies = dm.get_movies(user_id)
-    return f"List of {len(movies)} Movies for User #{user_id}"
+    return render_template('movies.html', user=user, movies=movies)
 
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
 def add_movie(user_id):
