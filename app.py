@@ -1,6 +1,6 @@
 import os
 from models import db, Movie
-from flask import Flask
+from flask import Flask, render_template
 from data_manager import DataManager
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ dm = DataManager()
 
 @app.route('/')
 def home():
-    return "Welcome to my Movie App!"
+    return render_template('index.html')
 
 @app.route('/users')
 def list_users():

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MoviWeb - 🎬 A Multi-User Movie Listing Web App!</title>
+  </head>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+  <body>
+    <header>
+      <nav>NavBar</nav>
+    </header>
+
+    <main class="container">
+
+      {% block content %}{% endblock %}
+
+    </main>
+  </body>
+</html>
