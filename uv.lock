@@ -162,7 +162,7 @@ wheels = [
 ]
 
 [[package]]
-name = "movie-flask-sqlalchemy"
+name = "moviweb"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

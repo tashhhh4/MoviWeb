@@ -1,5 +1,5 @@
 [project]
-name = "movie-flask-sqlalchemy"
+name = "MoviWeb"
 version = "1.0.0"
 description = "Movie Database Web App"
 readme = "README.md"

@@ -11,7 +11,7 @@ class DataManager():
         return new_user
 
     def get_users(self):
-        users = db.session.execute(db.select(User).order_by(User.name)).scalars()
+        users = db.session.execute(db.select(User).order_by(User.name)).scalars().all()
         return users
 
     def get_user(self, user_id):

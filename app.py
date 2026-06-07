@@ -23,6 +23,15 @@ dm = DataManager()
 def home():
     return "Welcome to my Movie App!"
 
+@app.route('/users')
+def list_users():
+    users = dm.get_users()
+    output = ''
+    for user in users:
+        output += str(user) + ', '
+    output = output[:-2]
+    return output
+
 
 if __name__ == '__main__':
     with app.app_context():

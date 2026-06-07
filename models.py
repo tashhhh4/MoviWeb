@@ -21,3 +21,6 @@ class User(db.Model):
     name = db.Column(db.String(300), nullable=False)
 
     movies = db.relationship("Movie", back_populates="user")
+
+    def __str__(self):
+        return self.name
