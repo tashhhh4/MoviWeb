@@ -44,7 +44,7 @@ def get_movies(user_id):
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
 def add_movie(user_id):
     user = dm.get_user(user_id)
-    title = request.form.get('title', None)
+    title = request.form['title']
     year = request.form.get('year', None)
     # Try to retrieve the other fields from OMDB API
     new_movie = Movie(
@@ -58,8 +58,12 @@ def add_movie(user_id):
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/update',
            methods=['POST'])
 def update_movie(user_id, movie_id):
-    # update the movie with new title
+    user = dm.get_user(user_id)
+    movie = dm.get_movie(movie_id)
+    title = request.form['title']
+    movie.title = title
     # Try to retrieve rest of movie info from OMDB API
+    dm.update_movie(movie)
     return redirect(url_for('get_movies', user_id=user_id))
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete',

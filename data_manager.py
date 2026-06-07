@@ -35,13 +35,15 @@ class DataManager():
         db.session.commit()
         return movie
 
+    def get_movie(self, movie_id):
+        movie = db.get_or_404(Movie, movie_id)
+        return movie
+
     def get_movies(self, user_id):
         user = db.get_or_404(User, user_id)
         return user.movies
 
-    def update_movie(self, movie_id, new_title):
-        movie = db.get_or_404(Movie, movie_id)
-        movie.title = new_title
+    def update_movie(self, movie):
         db.session.commit()
         return movie
 
