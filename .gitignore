@@ -9,3 +9,6 @@ secret.py
 
 # Class Notes
 guide/*
+
+# Database File
+data.sqlite

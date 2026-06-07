@@ -1,4 +1,5 @@
 import os
+import secret
 from models import db, Movie
 from flask import Flask, render_template, redirect, request, url_for, abort
 from data_manager import DataManager
@@ -11,7 +12,7 @@ app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    f'sqlite:///{os.path.join(basedir, "data/data.sqlite")}')
+    f'sqlite:///{os.path.join(basedir, secret.DB_FILE)}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
