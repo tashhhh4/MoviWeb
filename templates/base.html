@@ -9,13 +9,15 @@
     />
   <body>
     <header>
-      <h2>🎬 MoviWeb</h2>
-      <nav>
+      <div class="site-logo">
+        <h2 class="site-width">🎬 MoviWeb</h2>
+      </div>
+      <nav class="site-width">
         {% block nav %}{% endblock %}
       </nav>
     </header>
 
-    <main class="container">
+    <main class="container site-width">
 
       {% block content %}{% endblock %}
 

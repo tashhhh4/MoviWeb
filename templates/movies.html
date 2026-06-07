@@ -2,18 +2,17 @@
 
 {% block nav %}
 
-<a class="breadcrumbs">← Back to Users</a>
+<a href="{{ url_for('home') }}" class="breadcrumbs">← Back to Users</a>
 
 {% endblock %}
 
 {% block content %}
 
-<h1>Movies for {{ user.name }}</h1>
-
-<section class="movie-list">
+<section class="card-list movie-list">
+  <h1>Movies for {{ user.name }}</h1>
   <ul>
     {% for movie in movies %}
-    <li>
+    <li class="card">
       {% if movie.poster_url %}
       <img
           src="{{ movie.poster_url }}"
@@ -21,7 +20,13 @@
       />
       {% endif %}
       <form>
-        <input type="text" id="title" name="title" value="{{ movie.title }}"/>
+        <input
+            required
+            type="text"
+            id="title"
+            name="title"
+            value="{{ movie.title }}"
+        />
         <input class="btn sm" type="submit" value="Update"/>
       </form>
       {% if movie.year %}
@@ -45,9 +50,10 @@
 </section>
 
 <section class="movie-add-form">
-  <form>
+  <form class="card">
     <h2><label for="title">Add New Movie</label></h2>
     <input
+        required
         type="text"
         id="title"
         name="title"

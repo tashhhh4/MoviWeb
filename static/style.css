@@ -1,3 +1,171 @@
+:root {
+    --primary: #2563EB;
+    --primary-dark: #1E40AF;
+    --bg: #F8FAFC;
+    --border: #E5E7EB;
+    --text: #1E392B;
+    --white: #FFFFFF;
+    --danger: #EF4444;
+    --radius: 10px;
+    --shadow: 0 2px 8px #1E392B0F;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--bg);
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    color: var(--primary);
+}
+
+
+/* Header with App Logo */
+
+.site-logo {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 40px 20px;
+}
+
+.site-logo h2 {
+    max-width: 780px;
+}
+
+nav {
+    padding: 20px 20px 0 20px;
+}
+
+/* Footer with Copyright claim */
+
+footer {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+
+/* Main sections */
+
+.site-width {
+    max-width: 800px;
+    margin: auto;
+}
+
+.container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+
+/* Card List */
+
+.card-list ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 20px 20px 30px 20px;
+}
+
+
+/* Buttons */
+
+.btn {
+    color: var(--white);
+    background-color: var(--primary);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    width: fit-content;
+    border: none;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn.delete {
+    background-color: var(--danger);
+}
+
+.btn.sm {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+
+/* Forms */
+
+input[type="text"] {
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    font-size: 16px;
+    outline: none;
+    width: 60%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* User List */
+
+.user-list .card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 250px;
+}
+
+
+/* Movie List */
+
+.movie-info > :first-child {
+    font-weight: bold;
+}
+
+.movie-list .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 200px;
+}
+
+.movie-list .card img {
+    width: 200px;
+}
+
+.movie-list input[type="text"] {
+    width: 100%;
 }

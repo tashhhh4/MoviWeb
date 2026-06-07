@@ -33,7 +33,7 @@ def list_users():
 def create_user():
     name = request.form['name']
     dm.create_user(name)
-    return redirect('/')
+    return redirect(url_for('home'))
 
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
 def get_movies(user_id):
