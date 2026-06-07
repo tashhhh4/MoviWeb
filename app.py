@@ -21,7 +21,8 @@ dm = DataManager()
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    users = dm.get_users()
+    return render_template('index.html', users=users)
 
 @app.route('/users')
 def list_users():
@@ -31,6 +32,11 @@ def list_users():
         output += str(user) + ', '
     output = output[:-2]
     return output
+
+@app.route('/users/<int:user_id>/movies')
+def get_movies(user_id):
+    movies = dm.get_movies(user_id)
+    return f"List of {len(movies)} Movies for User #{user_id}"
 
 
 if __name__ == '__main__':
