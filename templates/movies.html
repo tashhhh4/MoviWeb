@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+<a class="breadcrumbs">← Back to Users</a>
+
+{% endblock %}
+
+{% block content %}
+
+<h1>Movies for {{ user.name }}</h1>
+
+<section class="movie-list">
+  <ul>
+    {% for movie in movies %}
+    <li>
+      <img
+          src="{{ movie.poster_url }}"
+          alt="Poster for {{ movie.title }}"
+      />
+    </li>
+    <form>
+      <input type="text" id="title" name="title"/>
+      <input class="btn sm" type="submit" value="Update"/>
+    </form>
+    {% if movie.year %}
+    <p class="movie-info">
+      <span>Year:</span>
+      <span>{{ movie.year }}</span>
+    </p>
+    {% endif %}
+    {% if movie.director %}
+    <p class="movie-info">
+      <span>Director:</span>
+      <span>{{ movie.director }}</span>
+    </p>
+    {% endif %}
+    <form>
+      <input class="btn sm delete" type="submit" value="Delete"/>
+    </form>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="movie-add-form">
+  <form>
+    <h2><label for="title">Add New Movie</label></h2>
+    <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Movie title"
+    />
+    <input
+        type="text"
+        id="year"
+        name="year"
+        placeholder="Year (optional)"
+    />
+    <input class="btn" type="submit" value="Add Movie"/>
+  </form>
+</section>
+
+{% endblock %}

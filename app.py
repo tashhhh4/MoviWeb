@@ -1,6 +1,6 @@
 import os
 from models import db, Movie
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from data_manager import DataManager
 
 app = Flask(__name__)
@@ -9,7 +9,8 @@ app = Flask(__name__)
 # Configure database
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "data/data.sqlite")}'
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f'sqlite:///{os.path.join(basedir, "data/data.sqlite")}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -30,7 +31,8 @@ def list_users():
 
 @app.route('/users', methods=['POST'])
 def create_user():
-    # create a user and add it to the database
+    name = request.form['name']
+    dm.create_user(name)
     return redirect('/')
 
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
