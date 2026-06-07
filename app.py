@@ -25,10 +25,12 @@ dm = DataManager()
 def home():
     return list_users()
 
+
 @app.route('/users', methods=['GET'])
 def list_users():
     users = dm.get_users()
     return render_template('index.html', users=users)
+
 
 @app.route('/users', methods=['POST'])
 def create_user():
@@ -36,11 +38,13 @@ def create_user():
     dm.create_user(name)
     return redirect(url_for('home'))
 
+
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
 def get_movies(user_id):
     user = dm.get_user(user_id)
     movies = dm.get_movies(user_id)
     return render_template('movies.html', user=user, movies=movies)
+
 
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
 def add_movie(user_id):
@@ -68,6 +72,7 @@ def add_movie(user_id):
     dm.add_movie(new_movie)
     return redirect(url_for('get_movies', user_id=user_id))
 
+
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/update',
            methods=['POST'])
 def update_movie(user_id, movie_id):
@@ -91,6 +96,7 @@ def update_movie(user_id, movie_id):
         dm.update_movie(movie)
     return redirect(url_for('get_movies', user_id=user_id))
 
+
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete',
            methods=['POST'])
 def delete_movie(user_id, movie_id):
@@ -102,7 +108,27 @@ def delete_movie(user_id, movie_id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('error.html',
+        code=404,
+        message="This page does not exist.",
+    ), 404
+
+
+@app.errorhandler(400)
+def bad_request(e):
+    return render_template('error.html',
+        code=400,
+        message="The expected inputs were not received by the server. This may happen if you to try to submit a form or a request in a way that wasn't intended by the developers."
+    ), 400
+
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('error.html',
+        code=500,
+        message=("The application could not fulfill this request "
+                 "due to a critical error."),
+    ), 500
 
 
 if __name__ == '__main__':

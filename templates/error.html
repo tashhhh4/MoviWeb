@@ -3,10 +3,8 @@
 {% block content %}
 
 <section class="error-page site-width">
-  <h1>
-    Error 404
-  </h1>
-  <p>This page does not exist.</p>.
+  <h1>Error {{ code }}</h1>
+  <p>{{ message }}</p>.
 </section>
 
 {% endblock %}
