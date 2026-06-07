@@ -2,6 +2,7 @@ import os
 from models import db, Movie
 from flask import Flask, render_template, redirect, request, url_for
 from data_manager import DataManager
+from movie_lookup import get_movie_details
 
 app = Flask(__name__)
 
@@ -45,12 +46,24 @@ def get_movies(user_id):
 def add_movie(user_id):
     user = dm.get_user(user_id)
     title = request.form['title']
-    year = request.form.get('year', None)
-    # Try to retrieve the other fields from OMDB API
+    year = request.form['year']
+    if year == '':
+        year = None
+    director = None
+    poster_url = None
+    if year:
+        year = int(year)
+    movie_details = get_movie_details(title, year)
+    if movie_details is None:
+        pass  # Leave details as specified by the User.
+    else:
+        title, year, director, poster_url = movie_details
     new_movie = Movie(
         user=user,
         title=title,
         year=year,
+        director=director,
+        poster_url = poster_url,
     )
     dm.add_movie(new_movie)
     return redirect(url_for('get_movies', user_id=user_id))
@@ -61,9 +74,21 @@ def update_movie(user_id, movie_id):
     user = dm.get_user(user_id)
     movie = dm.get_movie(movie_id)
     title = request.form['title']
-    movie.title = title
-    # Try to retrieve rest of movie info from OMDB API
-    dm.update_movie(movie)
+    year = movie.year
+    if year:
+        year = int(year)
+    movie_details = get_movie_details(title, year)
+    if movie_details is None:
+        # Leave details as specified by the User.
+        movie.title = title
+        dm.update_movie(movie)
+    else:
+        title, year, director, poster_url = movie_details
+        movie.title = title
+        movie.year = year
+        movie.director = director
+        movie.poster_url = poster_url
+        dm.update_movie(movie)
     return redirect(url_for('get_movies', user_id=user_id))
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete',
