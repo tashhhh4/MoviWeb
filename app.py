@@ -108,12 +108,16 @@ def update_movie(user_id, movie_id):
     try:
         title = extract_required(request.form, 'title')
         year = movie.year
+        director = None
+        poster_url = None
         if year:
             year = int(year)
         movie_details = get_movie_details(title, year)
         if movie_details is None:
             # Leave details as specified by the User.
             movie.title = title
+            movie.director = director
+            movie.poster_url = poster_url
             dm.update_movie(movie)
         else:
             title, year, director, poster_url = movie_details
