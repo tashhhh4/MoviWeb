@@ -14,6 +14,10 @@ class DataManager():
         users = db.session.execute(db.select(User).order_by(User.name)).scalars()
         return users
 
+    def get_user(self, user_id):
+        user = db.get_or_404(User, user_id)
+        return user
+
     def update_user(self, user_id, name):
         user = db.get_or_404(User, user_id)
         user.name = name
@@ -26,33 +30,18 @@ class DataManager():
         db.session.commit()
         return user
 
-    def add_movie(self, user_id, title, director=None, year=None, poster_url=None):
-        user = db.get_or_404(User, user_id)
-        new_movie = Movie(
-            title=title,
-            director=director,
-            year=year,
-            poster_url=poster_url,
-            user=user
-        )
-        db.session.add(new_movie)
+    def add_movie(self, movie):
+        db.session.add(movie)
         db.session.commit()
-        return new_movie
+        return movie
 
     def get_movies(self, user_id):
         user = db.get_or_404(User, user_id)
         return user.movies
 
-    def update_movie(self, movie_id, title=None, director=None, year=None, poster_url=None):
+    def update_movie(self, movie_id, new_title):
         movie = db.get_or_404(Movie, movie_id)
-        if title:
-            movie.title = title
-        if director:
-            movie.director = director
-        if year:
-            movie.year = year
-        if poster_url:
-            movie.poster_url = poster_url
+        movie.title = new_title
         db.session.commit()
         return movie
 
