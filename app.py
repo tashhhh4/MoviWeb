@@ -43,7 +43,6 @@ def get_movies(user_id):
 
 @app.route('/users/<int:user_id>/movies', methods=['POST'])
 def add_movie(user_id):
-    print('Running add_movie')
     user = dm.get_user(user_id)
     title = request.form.get('title', None)
     year = request.form.get('year', None)
@@ -66,7 +65,7 @@ def update_movie(user_id, movie_id):
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete',
            methods=['POST'])
 def delete_movie(user_id, movie_id):
-    # delete the movie with the specified `movie_id`
+    dm.delete_movie(movie_id)
     return redirect(url_for('get_movies', user_id=user_id))
 
 
